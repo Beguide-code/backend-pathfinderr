@@ -1,0 +1,24 @@
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(express.json());
+
+//route check 
+app.get("/api/health",(req,res)=>{
+    res.json({
+        message: "Pathfinderr backend is running",
+        timeStamp: new Date().toISOString()
+    });
+});
+
+app.listen(PORT, (error)=>{
+    if(error){
+        throw error;
+    }
+    console.log(`The server is runnning live on PORT ${PORT}`);
+});
