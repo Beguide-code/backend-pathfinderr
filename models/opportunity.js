@@ -9,7 +9,7 @@ class Opportunity{
             return result.rows;
     }
 
-    static async findById(){
+    static async findById(id){
         const result = await query(`
             SELECT * FROM opportunities
             WHERE id = $1 AND is_active = true

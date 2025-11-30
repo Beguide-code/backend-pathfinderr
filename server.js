@@ -2,12 +2,15 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const path = require("node:path");
+const opportunityRouter = require("./routes/opportunityRoutes")
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/api/opportunities", opportunityRouter);
 
 //route check 
 app.get("/api/health",(req,res)=>{
