@@ -57,9 +57,9 @@ class Student{
         const result = await query(
         `UPDATE students
          SET first_name = $1,surname = $2,country = $3,email = $4 ,date_of_birth = $5,cellphone = $6,address_street = $7,address_postal_code = $8,address_city = $9
-         WHERE id = $7
+         WHERE id = $10
          RETURNING id, first_name, surname, email, country, created_at`,
-         [first_name,surname,country,email,date_of_birth,cellphone,address_street,address_postal_code,address_city]
+         [first_name,surname,country,email,date_of_birth,cellphone,address_street,address_postal_code,address_city,id]
         );
        
         return result.rows[0];
