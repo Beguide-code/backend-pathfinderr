@@ -17,6 +17,33 @@ class Opportunity{
             return result.rows[0];
 
     }
+
+    static async findByFilters(filters = {}){
+        let sql = `SELECT * FROM opportunities WHERE is_active = true`;
+        const values = [];
+        let paramCount = 0;
+
+        if(filters.type){
+            paramCount++;
+            sql += ` AND type_opportunity = $${paramCount}`;
+            values.push(filters.type);
+        }
+        if(filters.major){
+            paramCount++;
+            sql += ` AND $${paramCount} = ANY(eligible_majors)`;
+            values.push(filters.major);
+        }
+         if(filters.minGpa){
+            paramCount++;
+            sql += ` AND min_gpa <= $${paramCount}`;
+            values.push(parseFloat(filters.minGpa));
+        }
+        sql += ' ORDER BY deadline ASC';
+        const result = await query(sql,values);
+        return result.rows;
+
+    }
+
 }
 
 module.exports = Opportunity;

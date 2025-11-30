@@ -44,8 +44,27 @@ const getOpportunityById = async (req,res)=>{
     
 };
 
+const getOpportunitiesByFilters = async (req,res) =>{
+        try{
+            const opportunities = await Opportunity.findByFilters(req.query);
+            res.json({
+                success: true,
+                count: opportunities.length,
+                data: opportunities
+            });
+        }
+        catch(error){
+            console.error("Error",error);
+            res.status(500).json({
+                success: false,
+                error: "Server error"
+            });
+        }
+};
+
 module.exports  = {
     getOpportunities,
-    getOpportunityById
+    getOpportunityById,
+    getOpportunitiesByFilters
 };
     

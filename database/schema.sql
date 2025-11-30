@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS applications(
 
 CREATE TABLE IF NOT EXISTS mentors(
     id SERIAL PRIMARY KEY,
-    mentor_name VARCHAR(255) NOT NULL,
+    
+     VARCHAR(255) NOT NULL,
     expertise TEXT[],
     bio TEXT,
     availability_hours JSONB,
