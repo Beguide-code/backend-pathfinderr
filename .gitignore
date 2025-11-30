@@ -1,2 +1,7 @@
 node_modules/
 .env
+
+#Database
+database/*.sql
+!database/schema.sql
+!database/seed.sql
