@@ -16,13 +16,21 @@ CREATE TABLE IF NOT EXISTS opportunities(
 CREATE TABLE IF NOT EXISTS students(
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
+    first_name VARCHAR(100) NOT NULL,
+    surname VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    cellphone VARCHAR(20),
+    date_of_birth DATE NOT NULL,
     major VARCHAR(100),
     gpa DECIMAL(3,2),
+    address_street VARCHAR(100),
+    address_postal_code VARCHAR(100),
+    address_city VARCHAR(100),
     graduation_year INTEGER,
     interests TEXT[],
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS applications(
@@ -38,8 +46,7 @@ CREATE TABLE IF NOT EXISTS applications(
 
 CREATE TABLE IF NOT EXISTS mentors(
     id SERIAL PRIMARY KEY,
-    
-     VARCHAR(255) NOT NULL,
+    mentor_name VARCHAR(255) NOT NULL,
     expertise TEXT[],
     bio TEXT,
     availability_hours JSONB,

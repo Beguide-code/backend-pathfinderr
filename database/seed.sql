@@ -5,9 +5,9 @@ INSERT INTO opportunities (title, description_opportunity, organization, deadlin
 ('Women in STEM Fellowship', 'Fellowship supporting women in STEM fields', 'Women Tech Council', '2024-04-30', 3.2, '{"Computer Science", "Biology", "Chemistry", "Physics", "Mathematics"}', 'fellowship', 'https://example.com/stem-fellowship'),
 ('Data Science Research Grant', 'Research grant for data science projects', 'Data Institute', '2024-03-15', 3.4, '{"Computer Science", "Statistics", "Mathematics"}', 'grant', 'https://example.com/ds-grant');
 
-INSERT INTO students (email, first_name, last_name, major, gpa, graduation_year, interests) VALUES
-('student1@university.edu', 'John', 'Doe', 'Computer Science', 3.8, 2025, '{"web development", "machine learning", "AI"}'),
-('student2@university.edu', 'Jane', 'Smith', 'Electrical Engineering', 3.6, 2024, '{"embedded systems", "robotics", "IoT"}');
+INSERT INTO students (email, first_name, surname,country,password_hash,date_of_birth) VALUES
+('student1@university.edu', 'John', 'Doe','Ghana', 'xxxxxxxx', '2024-03-31' );
+ 
 
 INSERT INTO mentors (mentor_name, expertise, bio, availability_hours) VALUES
 ('Dr. Sarah Chen', '{"career_advice", "resume_review", "interview_prep"}', 'Career counselor with 10+ years experience helping students land dream jobs', '{"monday": ["09:00-12:00", "14:00-17:00"], "wednesday": ["10:00-13:00"], "friday": ["09:00-11:00"]}'),
