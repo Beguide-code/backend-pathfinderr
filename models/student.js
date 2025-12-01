@@ -39,15 +39,13 @@ class Student{
     }
 
     static async findById(id){
-        const result = await query(`SELECT * FROM students WHERE id = $1
-            RETURNING id, first_name, surname, email, country, created_at`,
+        const result = await query(`SELECT first_name,surname,country,email,created_at FROM students WHERE id = $1`,
             [id]);
             return result.rows[0];
     }
 
     static async findByEmail(email){
-        const result = await query(`SELECT * FROM students WHERE id = $1
-            RETURNING id, first_name, surname, email, country, created_at`,
+        const result = await query(`SELECT first_name,surname,country,email,created_at FROM students WHERE email = $1`,
             [email]);
             return result.rows[0];
     }

@@ -36,7 +36,7 @@ const registerStudent = async (req,res) =>{
 
 const getStudentProfile = async (req,res) =>{
     try{
-        const student = await Student.findById(req.params,id);
+        const student = await Student.findById(req.params.id);
         if(!student){
             return res.status(404).json({
                 success: false,
