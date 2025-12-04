@@ -1,5 +1,6 @@
 const { query } = require("../config/database");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 class Student{
 
@@ -11,6 +12,27 @@ class Student{
     // static async verifyPassword(enteredPassword, storedHash){
     //     return await bcrypt.compare(enteredPassword,storedHash);
     // }
+
+    static async login(email,password){
+        const result = await query(`
+            SELECT * FROM students WHERE email = $1
+            `,[email]);
+            if(result.rows.length === 0){
+                throw new Error("Invalid credentials");
+            }
+
+            const student = result.rows;
+            const isPasswordValid = await bcrypt.compare(password, student.password_hash);
+            if(!isPasswordValid){
+                throw new Error("Invalid credentials");
+            }
+            const token = jwt.sign({ id: student.id,email: student.email },process.env.JWT_SECRET,
+                { expiresIn:"30d" });
+            const { password_hash, ...studentWithoutPassword } = student;
+            return{
+                ...studentWithoutPassword,token
+            };
+}
 
     static async create(studentData){
          const {first_name,surname,country,email,password,date_of_birth,cellphone,address_street,address_postal_code,address_city} = studentData;
@@ -25,18 +47,18 @@ class Student{
         return result.rows[0];
     }
 
-    static async findByEmailAndPassword(email,plainPassword){
-        const result = await query(`
-            SELECT * FROM students WHERE email = $1`,[email]);
-        if(result.rows.length === 0)
-            return null;
-        const student = result.rows[0];
-        const isPasswordValid = await this.verifyPassword(plainPassword, student.password_hash)
-        if(!isPasswordValid)
-            return null;
-        const { password_hash, ...studentWithoutPassword } = student;
-        return studentWithoutPassword;
-    }
+    // static async findByEmailAndPassword(email,plainPassword){
+    //     const result = await query(`
+    //         SELECT * FROM students WHERE email = $1`,[email]);
+    //     if(result.rows.length === 0)
+    //         return null;
+    //     const student = result.rows[0];
+    //     const isPasswordValid = await this.verifyPassword(plainPassword, student.password_hash)
+    //     if(!isPasswordValid)
+    //         return null;
+    //     const { password_hash, ...studentWithoutPassword } = student;
+    //     return studentWithoutPassword;
+    // }
 
     static async findById(id){
         const result = await query(`SELECT first_name,surname,country,email,created_at FROM students WHERE id = $1`,

@@ -1,3 +1,4 @@
+
 const Student = require("../models/student");
 
 const registerStudent = async (req,res) =>{
