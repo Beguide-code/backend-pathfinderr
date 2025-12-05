@@ -4,6 +4,7 @@ require("dotenv").config();
 const path = require("node:path");
 const opportunityRouter = require("./routes/opportunityRoutes");
 const studentRouter = require("./routes/studentRoutes");
+const authRouter = require("./routes/authRoutes");
  
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/api/opportunities", opportunityRouter);
 app.use("/api/students", studentRouter);
+app.use("/api/auth",authRouter);
 
 //route check 
 app.get("/api/health",(req,res)=>{
