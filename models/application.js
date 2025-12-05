@@ -37,7 +37,7 @@ class Application{
             UPDATE applications
             SET status_application = COALESCE($1,status_application),
                 notes = COALESCE($2,notes),
-                application_data = COALESCE($3, application_date),
+                application_date = COALESCE($3, application_date),
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = $4
             RETURNING *
