@@ -64,6 +64,13 @@ const getStudentProfile = async (req,res) =>{
 
 const updateStudentProfile = async (req,res)=>{
     try{
+        if(req.student.id !== parseInt(req.params.id)){
+            return res.status(403).json({
+                success:false,
+                error: "Not authorized to update this student"
+            });
+        }
+
         const student = await Student.update(req.params.id, req.body);
          if(!student){
             return res.status(404).json({
