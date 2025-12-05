@@ -64,7 +64,7 @@ class Student{
 }
 
     static async findById(id){
-        const result = await query(`SELECT first_name,surname,country,email,created_at FROM students WHERE id = $1`,
+        const result = await query(`SELECT id,first_name,surname,country,email,created_at FROM students WHERE id = $1`,
             [id]);
             return result.rows[0];
     }

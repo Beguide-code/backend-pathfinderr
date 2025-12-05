@@ -5,6 +5,7 @@ const path = require("node:path");
 const opportunityRouter = require("./routes/opportunityRoutes");
 const studentRouter = require("./routes/studentRoutes");
 const authRouter = require("./routes/authRoutes");
+const applicationRouter = require("./routes/applicationRoutes");
  
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/api/opportunities", opportunityRouter);
 app.use("/api/students", studentRouter);
 app.use("/api/auth",authRouter);
+app.use("/api/applications",applicationRouter);
 
 //route check 
 app.get("/api/health",(req,res)=>{
@@ -30,3 +32,5 @@ app.listen(PORT, (error)=>{
     }
     console.log(`The server is runnning live on PORT ${PORT}`);
 });
+
+ 
