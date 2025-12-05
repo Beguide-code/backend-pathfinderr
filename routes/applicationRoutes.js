@@ -7,7 +7,7 @@ applicationRouter.use(protect);
 
 applicationRouter.post("/",applicationController.createApplication);
 applicationRouter.get("/",applicationController.getStudentApplications);
-applicationRouter.put("/",applicationController.updateApplication);
-applicationRouter.delete("/",applicationController.deleteApplication);
+applicationRouter.put("/:id",applicationController.updateApplication);
+applicationRouter.delete("/:id",applicationController.deleteApplication);
 
 module.exports = applicationRouter;
