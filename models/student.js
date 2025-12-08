@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 
 class Student{
-
+ 
     static async hashPassword(plainPassword){
         const saltRounds = 10;
         return await bcrypt.hash(plainPassword,saltRounds);
@@ -120,3 +120,4 @@ class Student{
 }
 
 module.exports = Student;
+
