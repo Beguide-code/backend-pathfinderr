@@ -64,7 +64,7 @@ class Student{
 }
 
     static async findById(id){
-        const result = await query(`SELECT id,first_name,surname,country,email,created_at FROM students WHERE id = $1`,
+        const result = await query(`SELECT id,first_name,surname,country,email,created_at,gpa, graduation_year, major, interests FROM students WHERE id = $1`,
             [id]);
             return result.rows[0];
     }
@@ -80,7 +80,7 @@ class Student{
         const values = [];
          
         const allowedFields = [
-            'first_name','surname','country','date_of_birth','cellphone','address_street','address_postal_code','address_city'
+            'first_name','surname','country','date_of_birth','cellphone','address_street','address_postal_code','address_city','gpa','graduation_year','major','interests'
         ];
 
         Object.keys(updateData).forEach((key,index)=>{
@@ -109,7 +109,7 @@ class Student{
         UPDATE students
         SET ${updates.join(', ')}
         WHERE id = $${values.length}
-        RETURNING id, first_name, surname, email, country, created_at
+        RETURNING id, first_name, surname, email, country, created_at, gpa, graduation_year, major, interests
         `;
 
         const result = await query(sql,values);

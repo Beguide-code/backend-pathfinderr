@@ -28,6 +28,11 @@ class Opportunity{
             sql += ` AND type_opportunity = $${paramCount}`;
             values.push(filters.type);
         }
+        if(filters.country){
+            paramCount++;
+            sql += ` AND country_opportunity = $${paramCount}`;
+            values.push(filters.country);
+        }
         if(filters.major){
             paramCount++;
             sql += ` AND $${paramCount} = ANY(eligible_majors)`;
